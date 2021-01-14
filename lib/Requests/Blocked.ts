@@ -1,11 +1,11 @@
+import type { ISubscriberBlockAddBody, ISubscriberBlockAddReq, ISubscriberBlockDeleteBody, ISubscriberBlockDeleteReq, ISubscriberBlockListBody, ISubscriberBlockListReq } from "models.wolf.js";
 import type IOClient from "../IOClient";
-import type { ISubscriberBlockAdd, ISubscriberBlockDelete, ISubscriberBlockList } from "../ReqParams/Blocked";
 
-export const SubscriberBlockList = async (io: IOClient, data: ISubscriberBlockList) =>
-    await io.Emit('subscriber block list', data);
+export const SubscriberBlockList = async (io: IOClient, data: ISubscriberBlockListBody) =>
+    await io.Emit<ISubscriberBlockListReq>('subscriber block list', { body: data });
 
-export const SubscriberBlockAdd = async (io: IOClient, data: ISubscriberBlockAdd) =>
-    await io.Emit('subscriber block add', data);
+export const SubscriberBlockAdd = async (io: IOClient, data: ISubscriberBlockAddBody) =>
+    await io.Emit<ISubscriberBlockAddReq>('subscriber block add', { body: data });
 
-export const SubscriberBlockDelete = async (io: IOClient, data: ISubscriberBlockDelete) =>
-    await io.Emit('subscriber block delete', data);
+export const SubscriberBlockDelete = async (io: IOClient, data: ISubscriberBlockDeleteBody) =>
+    await io.Emit<ISubscriberBlockDeleteReq>('subscriber block delete', { body: data });

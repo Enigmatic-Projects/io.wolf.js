@@ -1,3 +1,4 @@
+import type { IRequest } from "models.wolf.js";
 import io from "socket.io-client";
 
 export interface IIOClientOptions {
@@ -53,9 +54,9 @@ export default class IOClient {
 	 * @returns This IOClient
 	 */
 	On = <T>(event: string, fn: (data: T) => any): IOClient => {
-			this.Conn.on(event, fn);
-			return this;
-	};
+		this.Conn.on(event, fn);
+		return this;
+	}
 
 	/**
 	 * Adds a listener for a particular event that will be invoked a single time before being automatically removed
@@ -64,9 +65,9 @@ export default class IOClient {
 	 * @returns This IOClient
 	 */
 	Once = <T>(event: string, fn: (data: T) => any): IOClient => {
-			this.Conn.once(event, fn);
-			return this;
-	};
+		this.Conn.once(event, fn);
+		return this;
+	}
 
 	/**
 	 * Removes a listener for a particular type of event. This will either remove a specific listener, or all listeners for this type of event
@@ -75,9 +76,9 @@ export default class IOClient {
 	 * @returns This IOClient
 	 */
 	Off = <T>(event: string, fn?: (data: T) => any): IOClient => {
-			this.Conn.off(event, fn);
-			return this;
-	};
+		this.Conn.off(event, fn);
+		return this;
+	}
 
 	/**
 	 * Send a Request of type Req to WOLF, and expect a Resp of type Res back
@@ -85,7 +86,7 @@ export default class IOClient {
 	 * @param data the data to send for the request
 	 * @returns Response of type Res
 	 */
-  	Emit = ( event: string, data?: any) => new Promise((resolve, reject) => {
+  	Emit = <Req extends IRequest>( event: string, data?: Req) => new Promise((resolve, reject) => {
 		this.Conn.emit(event, data, (resp) => {
 			if (resp.code >= 200 && resp.code <= 299) resolve(resp);
 			reject(resp);

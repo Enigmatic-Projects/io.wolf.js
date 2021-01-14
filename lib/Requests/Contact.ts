@@ -1,12 +1,12 @@
+import type { ISubscriberContactListBody, ISubscriberContactListReq, ISubscriberContactAddBody, ISubscriberContactAddReq, ISubscriberContactDeleteBody, ISubscriberContactDeleteReq } from "models.wolf.js";
 import type IOClient from "../IOClient";
-import type { ISubscriberContactAdd, ISubscriberContactDelete, ISubscriberContactList } from "../ReqParams/Contact";
 
-export const SubscriberContactList = async (io: IOClient, data: ISubscriberContactList) =>
-    await io.Emit('subscriber contact list', data);
+export const SubscriberContactList = async (io: IOClient, data: ISubscriberContactListBody) =>
+    await io.Emit<ISubscriberContactListReq>('subscriber contact list', { body: data });
 
-export const SubscriberContactAdd = async (io: IOClient, data: ISubscriberContactAdd) =>
-    await io.Emit('subscriber contact add', data);
+export const SubscriberContactAdd = async (io: IOClient, data: ISubscriberContactAddBody) =>
+    await io.Emit<ISubscriberContactAddReq>('subscriber contact add', { body: data });
 
-export const SubscriberContactDelete = async (io: IOClient, data: ISubscriberContactDelete) =>
-    await io.Emit('subscriber contact delete', data);
+export const SubscriberContactDelete = async (io: IOClient, data: ISubscriberContactDeleteBody) =>
+    await io.Emit<ISubscriberContactDeleteReq>('subscriber contact delete', { body: data });
 

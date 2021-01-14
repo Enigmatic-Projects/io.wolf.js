@@ -1,8 +1,8 @@
+import type { IStageListBody, IStageListReq, IStageGroupActiveListBody, IStageGroupActiveListReq } from "models.wolf.js";
 import type IOClient from "../IOClient";
-import type { IStageGroupActiveList, IStageList } from "../ReqParams/Stage";
 
-export const StageList = async (io: IOClient, data: IStageList) =>
-    await io.Emit('stage list', { body: data });
+export const StageList = async (io: IOClient, data: IStageListBody) =>
+    await io.Emit<IStageListReq>('stage list', { body: data });
 
-export const StageGroupActiveList = async (io: IOClient, data: IStageGroupActiveList) =>
-    await io.Emit('stage group active list', { body: data });
+export const StageGroupActiveList = async (io: IOClient, data: IStageGroupActiveListBody) =>
+    await io.Emit<IStageGroupActiveListReq>('stage group active list', { body: data });
